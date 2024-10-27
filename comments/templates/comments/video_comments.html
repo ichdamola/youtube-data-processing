@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Comments</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        h1 {
+            color: #c4302b; /* YouTube red */
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        form {
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            max-width: 600px; /* Set the same width as profile and comments box */
+            margin-left: auto;
+            margin-right: auto;
+        }
+        input[type="text"] {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #c4302b; /* YouTube red */
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #a8271e; /* Darker red */
+        }
+        .profile-box {
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+            max-width: 600px; /* Ensure consistent width */
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .video-title {
+            font-size: 24px;
+            color: #c4302b; /* YouTube red */
+            margin: 0 0 10px;
+        }
+        .video-description {
+            color: #555;
+            margin: 10px 0;
+        }
+        .video-stats {
+            color: #333;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .comments-box {
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+            max-width: 600px; /* Ensure consistent width */
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .comment {
+            border-bottom: 1px solid #e1e8ed;
+            padding: 10px 0;
+            margin: 5px 0;
+        }
+        .comment:last-child {
+            border-bottom: none;
+        }
+        .comment-author {
+            font-weight: bold;
+            color: #c4302b; /* YouTube red */
+        }
+        .comment-text {
+            color: #333;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Get Video Comments</h1>
+    <form method="POST" action="{% url 'video_comments' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Get Comments</button>
+    </form>
+    
+    {% if video_details %}
+        <div class="profile-box">
+            <h2 class="video-title">{{ video_details.title }}</h2>
+            <p class="video-description"><strong>Description: </strong>{{ video_details.description }}</p>
+            <p class="video-stats">Views: {{ video_details.view_count }} | Likes: {{ video_details.like_count }}</p>
+        </div>
+    {% endif %}
+
+    {% if comments %}
+        <div class="comments-box">
+            <h2>Comments</h2>
+            {% for comment in comments %}
+                <div class="comment">
+                    <span class="comment-author">{{ comment.author }}</span>
+                    <p class="comment-text">{{ comment.text }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+    
+    <script>
+        // Example JavaScript for interactivity (optional)
+        document.querySelector('form').addEventListener('submit', function(event) {
+            const videoIdInput = document.querySelector('input[name="video_id"]');
+            if (!videoIdInput.value) {
+                alert('Please enter a valid video ID!');
+                event.preventDefault(); // Prevent form submission
+            }
+        });
+    </script>
+
+</body>
+</html>

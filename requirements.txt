@@ -1,0 +1,4 @@
+Django
+python-dotenv
+google-api-python-client
+google-api-core

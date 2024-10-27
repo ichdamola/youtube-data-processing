@@ -1,0 +1,26 @@
+name: Python application
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+        pip install codecov coverage
+    - name: Run tests with coverage
+      run: |
+        coverage run manage.py test
+        coverage xml
+    - name: Upload coverage to Codecov
+      env:
+        CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}  # Use your Codecov token here
+      run: bash <(curl -s https://codecov.io/bash) -t $CODECOV_TOKEN

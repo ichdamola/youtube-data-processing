@@ -3,6 +3,9 @@
 [![Codecov](https://codecov.io/github/ichdamola/youtube-data-processing/graph/badge.svg?token=WEQLCYEIU0)](https://codecov.io/github/ichdamola/youtube-data-processing)
 [![Codecov Graph](https://codecov.io/gh/ichdamola/youtube-data-processing/graphs/sunburst.svg?token=WEQLCYEIU0)](https://codecov.io/github/ichdamola/youtube-data-processing)
 
+<img width="1470" alt="screen" src="https://github.com/user-attachments/assets/68006549-f808-4ecd-be58-d3f9f3a2fd33">
+
+
 ## Overview
 
 This project processes YouTube data using the YouTube API. It allows you to retrieve and manage video comments, providing insights into user interactions.
@@ -66,6 +69,13 @@ This command will launch the development server, allowing you to interact with t
 ### Codecov Integration
 
 The application uses Codecov for continuous integration and code coverage tracking. You can view detailed coverage reports and metrics on [Codecov](https://codecov.io/github/ichdamola/youtube-data-processing).
+
+## Demo Video
+
+
+https://github.com/user-attachments/assets/96eb6f17-640b-41b3-b29b-d18cc7cc7396
+
+
 
 ## License
 

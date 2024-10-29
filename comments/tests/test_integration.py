@@ -3,7 +3,7 @@
 from django.test import TestCase
 from django.urls import reverse
 from unittest.mock import patch
-from .forms import VideoForm
+from comments.forms import VideoForm
 
 class VideoCommentsViewTests(TestCase):
 

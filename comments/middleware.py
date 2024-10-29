@@ -7,7 +7,7 @@ from django.utils import timezone
 # Set up logging
 logger = logging.getLogger(__name__)
 
-RATE_LIMIT = 5  # Number of allowed requests
+RATE_LIMIT = 2  # Number of allowed requests
 TIME_WINDOW = 60  # Time window in seconds
 
 class RateLimitMiddleware:

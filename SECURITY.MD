@@ -1,6 +1,6 @@
 # Security Policy
 
-We love having you as part of our community and appreciate your help in keeping this project secure! If you find any security issues, please let us know by creating a GitHub issue.
+I will appreciate your help in keeping this project secure! If you find any security issues, please let me know by creating a GitHub issue.
 
 ## How to Report a Vulnerability
 
@@ -10,6 +10,6 @@ We love having you as part of our community and appreciate your help in keeping 
    - The potential impact.
    - Any examples if you have them.
 
-## We Value Your Input
+## I Value Your Input
 
-Your contributions are important to us! If we confirm your report, we’ll acknowledge your help in our project updates.
+Your contributions are important to me!

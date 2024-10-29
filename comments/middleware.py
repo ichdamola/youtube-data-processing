@@ -1,10 +1,10 @@
 # middleware.py
-import logging  # Import logging
+import logging
 from django.core.cache import cache
 from django.http import JsonResponse
 from django.utils import timezone
 
-# Configure logging
+# Set up logging
 logger = logging.getLogger(__name__)
 
 RATE_LIMIT = 5  # Number of allowed requests
@@ -15,30 +15,27 @@ class RateLimitMiddleware:
         self.get_response = get_response
 
     def __call__(self, request):
-        if request.method == 'POST' and request.path == '/your-endpoint/':
+        if request.method == 'POST' and request.path == '/video_comments/':
             ip_address = request.META.get('REMOTE_ADDR')
             cache_key = f"rate_limit_{ip_address}"
             request_count = cache.get(cache_key, 0)
             last_request_time = cache.get(f"{cache_key}_time", timezone.now())
 
-            # Log the current request and count
-            logger.info(f"Received request from IP: {ip_address}. Current count: {request_count}")
-
             # Check if the time window has expired
             if (timezone.now() - last_request_time).total_seconds() > TIME_WINDOW:
-                logger.info(f"Time window expired for IP: {ip_address}. Resetting request count.")
+                logger.info(f"Rate limit reset for IP: {ip_address}")
                 request_count = 0  # Reset count if time window has passed
 
             # If request count exceeds the limit, return an error response
             if request_count >= RATE_LIMIT:
-                logger.warning(f"Rate limit exceeded for IP: {ip_address}. Request denied.")
+                logger.warning(f"Rate limit exceeded for IP: {ip_address}")
                 return JsonResponse({'error': 'Rate limit exceeded. Try again later.'}, status=429)
 
             # Increment request count and update the last request time
             request_count += 1
             cache.set(cache_key, request_count, TIME_WINDOW)
             cache.set(f"{cache_key}_time", timezone.now(), TIME_WINDOW)
-            logger.info(f"Request count updated for IP: {ip_address}. New count: {request_count}")
+            logger.info(f"Request count for IP: {ip_address} is now {request_count}")
 
         response = self.get_response(request)
         return response

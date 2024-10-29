@@ -8,10 +8,12 @@ setup:
 	@python3 manage.py migrate
 
 test:
+	@chmod +x comments/tests/test_rate_limit.sh
+	@./comments/tests/test_rate_limit.sh  
 	@coverage run manage.py test
 	@coverage report
 	@coverage xml
-	@bash <(curl -s https://codecov.io/bash) -t c69bdf54-f559-4a24-a23c-4d4ae2c505922
+	@bash -c 'bash <(curl -s https://codecov.io/bash) -t c69bdf54-f559-4a24-a23c-d4ae2c505922'
 
 run:
 	@python3 manage.py runserver
